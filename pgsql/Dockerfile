@@ -13,3 +13,5 @@ RUN	rm /usr/sbin/policy-rc.d
 
 ADD	. /usr/bin
 RUN	chmod +x /usr/bin/start_pgsql.sh
+
+EXPOSE 5432
