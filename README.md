@@ -17,3 +17,13 @@ PGSQL_IP=$(docker inspect $PGSQL | grep IPAddress | awk '{ print $2 }' | tr -d '
 # connect through the client
 psql -h $PGSQL_IP -Uroot -d postgres
 ```
+
+
+### Connecting through a linked container
+```bash
+
+# start the database
+docker run --name pgsql -d synthomat/pgsql /usr/bin/start_pgsql.sh YOURPASSWORD
+
+# connect through a new container
+docker run --link pgsql:db --rm -t -i postgres /bin/sh -c 'psql -h $DB\_PORT\_5432\_TCP_ADDR -U root postgres'
